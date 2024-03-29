@@ -14,52 +14,33 @@ void init_code() {
     #endif
 }
 
-bool check(int n) {
-     while(n > 0) {
-            if(n%10 > 1) {
-                return false;
-            }
-            n /= 10;
-        }
-
-    return true;
-}
- 
 int main(void) {
     init_code();
     int t = 0;
     cin >> t;
-      ll lim = pow(2, 4);
+    ll lim = pow(2, 5);
     vector<int> fac(1e5+1);
 
-        for(ll i = 1; i <= lim; i++) {
-            int num = stoi(bitset<64>(i).to_string());;
-            if(num > 1e5)
-                break;
-            fac[num] = 1;
-        }
+    for(ll i = 1; i <= lim; i++) {
+        int num = stoi(bitset<64>(i).to_string());
+        fac[num] = 1;
+    }
 
-        for(int i = 0; i <= 1e5; i++) {
-            if(fac[i] == 0)
-                continue;
-            for(ll j = 2; j <= lim; j++){
-                int num2 = stoi(bitset<64>(j).to_string());
-                if(num2 > 1e5)
-                    break;
-                if(i * num2 > 1e5)
-                    break;
-                fac[i*num2] = 1;
-            }
+    for(int i = 0; i <= 1e5; i++) {
+        if(fac[i] == 0)
+            continue;
+        for(ll j = 2; j <= lim; j++){
+            int num2 = stoi(bitset<64>(j).to_string());
+            if(i * num2 > 1e5)
+                break;
+            fac[i*num2] = 1;
         }
+    }
 
 
     while(t--) {
         ll n;
         cin >> n;
-        if(check(n)) {
-            cout<<"YES"<<endl;
-            continue;
-        }
         if(fac[n]) {
             cout<<"YES"<<endl;
         } else {
