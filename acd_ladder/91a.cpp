@@ -14,6 +14,7 @@ void init_code() {
     #endif
 }
 
+
 void gen(int i, string num, vector<ll>& lucky) {
     if(i >= 3) {
         if(stoi(num) != 0)
@@ -34,18 +35,21 @@ int main(void) {
     vector<ll> lucky;
     gen(0, "", lucky);
     
+    int count = 0;
     while(n > 1) {
         bool flag = false;
         for(int i : lucky) {
             if(n%i == 0) {
                 n /= i;
+                count++;
                 flag = true;
+                break;
             }
         }
-        if(!flag)
+        if(!flag || count  > 0)
             break;
     }
 
-    cout<<(n == 1?"YES":"NO")<<endl;
+    cout<<(count > 0?"YES":"NO")<<endl;
     return 0;
 }
