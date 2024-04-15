@@ -17,25 +17,20 @@ void init_code() {
 int main(void) {
     init_code();
     
-    ll n, a, b;
-    cin >> n >> a >> b;
-    set<ll> A;
-    ll t;
-    REP(i, 0, n) {
-        cin >> t;
-        A.insert(t%(a+b));
-    }
-
-    vector<ll> sol;
-    sol.insert(sol.begin(), A.begin(), A.end());
-
-    for(int i = 1; i < sol.size(); i++) {
-        if((sol[i] - sol[i-1])%(a+b) > b) {
-            cout<<"Yes"<<endl;
-            return 0;
-        }
-    }
+    ll n;
+    cin >> n;
+    map<string, int> mp;
+    pair<string,int> winningTeam;
     
-    cout<<((sol[sol.size()-1] - sol[0])%(a+b) > b?"Yes":"No")<<endl;
+    REP(i, 0, n) {
+        string str;
+        cin >> str;
+        mp[str]++;
+        if(winningTeam.second < mp[str])
+            winningTeam = {str, mp[str]};
+    }
+
+    cout<<winningTeam.first<<endl;
+
     return 0;
 }

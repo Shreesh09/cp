@@ -1,4 +1,5 @@
 .vscode/
-*/a.exe
+gen_test.cpp
+a.exe
 in.txt
 out.txt
