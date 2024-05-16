@@ -21,11 +21,22 @@ int main(void) {
     while(t--) {
         ll n;
         cin >> n;
-        vector<ll> A(n);
-        REP(i, 0, n) {
+        vector<ll> A(n+1);
+        REP(i, 1, n+1) {
             cin >> A[i];
         }
 
+        ll i = 1, j = 1;
+        ll count = 0;
+        for(j = 1; j <= n; j++) {
+            ll diff = j - i + 1;
+            if(A[j] < diff) {
+                i = min(j, i + diff-A[j]);
+            }
+            count += j - i + 1;
+        }
+
+        cout<<count<<endl;
     }
     return 0;
 }
